@@ -1,7 +1,9 @@
 // Pre-populated Application State with 4-Monitor Dummy Data
 let appData = {
     settings: {
-        color_bg: '#0f0f11', color_primary: '#ffffff', color_secondary: '#ff4500', font: "'Inter', sans-serif"
+        color_bg: '#0f0f11', color_primary: '#ffffff', color_secondary: '#ff4500', font: "'Inter', sans-serif",
+        color_ru_title: '#ffffff', color_kz_title: '#ff4500', color_price: '#00ff00',
+        color_dish_bg: '#1a1a1d', color_group_bg: '#111111', color_title_bg: '#dc3545'
     },
     monitors: [
         {
@@ -84,10 +86,24 @@ function applyGlobalSettings() {
     root.style.setProperty('--primary-color', appData.settings.color_primary);
     root.style.setProperty('--secondary-color', appData.settings.color_secondary);
     root.style.setProperty('--font-family', appData.settings.font);
-    document.getElementById('color-bg').value = appData.settings.color_bg;
-    document.getElementById('color-primary').value = appData.settings.color_primary;
-    document.getElementById('color-secondary').value = appData.settings.color_secondary;
-    document.getElementById('font-select').value = appData.settings.font;
+    
+    root.style.setProperty('--color-ru-title', appData.settings.color_ru_title || '#ffffff');
+    root.style.setProperty('--color-kz-title', appData.settings.color_kz_title || '#ff4500');
+    root.style.setProperty('--color-price', appData.settings.color_price || '#00ff00');
+    root.style.setProperty('--color-dish-bg', appData.settings.color_dish_bg || '#1a1a1d');
+    root.style.setProperty('--color-group-bg', appData.settings.color_group_bg || '#111111');
+    root.style.setProperty('--color-title-bg', appData.settings.color_title_bg || '#dc3545');
+
+    ['color-bg', 'color-primary', 'color-secondary', 'font-select', 'color-ru-title', 'color-kz-title', 'color-price', 'color-dish-bg', 'color-group-bg', 'color-title-bg'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            if (id === 'font-select') el.value = appData.settings.font;
+            else {
+                const key = id.replace(/-/g, '_');
+                el.value = appData.settings[key] || '#ffffff';
+            }
+        }
+    });
 }
 
 btns.cms.addEventListener('click', () => switchView('cms'));
@@ -115,13 +131,11 @@ function updateMonitorDropdowns() {
         if (idx === currentMonitorIndex) { option1.selected = true; option2.selected = true; }
         cmsSelect.add(option1); displaySelect.add(option2);
     });
-    if(appData.monitors.length > 0) document.getElementById('layout-select').value = appData.monitors[currentMonitorIndex].layout || 'layout-1-sidebar-grid';
 }
 
 document.getElementById('cms-monitor-select').addEventListener('change', (e) => { currentMonitorIndex = parseInt(e.target.value); document.getElementById('active-monitor-select').value = currentMonitorIndex; updateMonitorDropdowns(); renderCms(); });
 document.getElementById('active-monitor-select').addEventListener('change', (e) => { currentMonitorIndex = parseInt(e.target.value); document.getElementById('cms-monitor-select').value = currentMonitorIndex; updateMonitorDropdowns(); renderDisplay(); });
-['color-bg', 'color-primary', 'color-secondary', 'font-select'].forEach(id => { document.getElementById(id).addEventListener('change', (e) => { const key = id.replace('-select', '').replace('-', '_'); appData.settings[key] = e.target.value; applyGlobalSettings(); }); });
-document.getElementById('layout-select').addEventListener('change', (e) => { appData.monitors[currentMonitorIndex].layout = e.target.value; });
+['color-bg', 'color-primary', 'color-secondary', 'font-select', 'color-ru-title', 'color-kz-title', 'color-price', 'color-dish-bg', 'color-group-bg', 'color-title-bg'].forEach(id => { document.getElementById(id).addEventListener('change', (e) => { const key = id === 'font-select' ? 'font' : id.replace(/-/g, '_'); appData.settings[key] = e.target.value; applyGlobalSettings(); }); });
 
 function renderCms() {
     containers.categories.innerHTML = '';
@@ -196,7 +210,7 @@ function renderDisplay() {
     const currentMonitor = appData.monitors[currentMonitorIndex];
     if(!currentMonitor) return;
 
-    containers.board.className = `menu-board ${currentMonitor.layout || 'layout-1-sidebar-grid'}`;
+    containers.board.className = `menu-board`;
     containers.board.innerHTML = '';
 
     // Calculate total items across all groups on this monitor to divide screen space proportionally
