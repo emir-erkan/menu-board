@@ -4,52 +4,37 @@
     --secondary-color: #ff4500;
     --font-family: 'Inter', sans-serif;
     --card-bg: #1a1a1d;
+    --card-bg-vibrant: #ffaa00; /* For dynamic card accents */
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: var(--font-family);
     background-color: var(--bg-color);
     color: var(--primary-color);
     overflow-x: hidden;
+    height: 100vh;
 }
 
 /* Navigation & Buttons */
-.top-nav {
-    background: #000;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #333;
-}
-
+.top-nav { background: #000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; z-index: 100; position: relative;}
 .nav-left, .nav-right { display: flex; gap: 1rem; align-items: center; }
-
-button, .monitor-dropdown {
-    cursor: pointer; font-family: inherit; border: none; border-radius: 4px;
-    padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.9rem; transition: 0.2s;
-}
-
+button, .monitor-dropdown { cursor: pointer; font-family: inherit; border: none; border-radius: 4px; padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
 .top-nav button { background: #333; color: #fff; }
 .top-nav button.active { background: var(--secondary-color); }
 .accent-btn { background: #007bff !important; }
-
 .primary-btn { background: #333; color: white; width: 100%; margin-top: 1rem; padding: 0.75rem; }
-.secondary-btn { background: #444; color: white; width: 100%; margin-top: 0.5rem; padding: 0.5rem; }
+.secondary-btn { background: #444; color: white; margin-top: 0.5rem; padding: 0.5rem; }
 .success-btn { background: #28a745; color: white; width: 100%; margin-top: 0.5rem; padding: 0.75rem; }
+.danger-btn { background: #dc3545; color: white; font-size: 0.8rem; padding: 0.4rem; border-radius: 4px; }
 
 /* Views */
-.view-section { display: none; min-height: 100vh; }
+.view-section { display: none; height: calc(100vh - 65px); overflow-y: auto; }
 .view-section.active { display: block; }
 
 /* CMS Sidebar */
-.cms-container { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; padding: 2rem; }
+.cms-container { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; padding: 2rem; height: 100%; }
 .setting-group { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #333; }
 .sidebar label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: #aaa; }
 .sidebar select, .sidebar input[type="color"] { width: 100%; padding: 0.5rem; background: var(--card-bg); color: white; border: 1px solid #333; border-radius: 4px; margin-bottom: 0.5rem;}
@@ -58,48 +43,74 @@ button, .monitor-dropdown {
 .category-card { background: var(--card-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color); }
 .category-header { display: flex; gap: 1rem; margin-bottom: 1rem; }
 .category-header input { flex: 1; background: transparent; border: 1px solid #333; color: white; padding: 0.5rem; font-size: 1.2rem; }
-
-.dish-row {
-    display: grid; grid-template-columns: 80px 1fr 1fr 100px auto auto; gap: 1rem;
-    align-items: center; background: #000; padding: 1rem; border-radius: 4px; margin-top: 0.5rem;
-}
+.dish-row { display: grid; grid-template-columns: 80px 1fr 1fr 100px auto auto; gap: 1rem; align-items: center; background: #000; padding: 1rem; border-radius: 4px; margin-top: 0.5rem; }
 .dish-row input[type="text"] { background: transparent; border: none; border-bottom: 1px solid #333; color: white; padding: 0.25rem; width: 100%; }
 .dish-row input[type="file"] { font-size: 0.7rem; color: #aaa; width: 100px; }
 .cms-dish-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
 
-/* Display Board - Fullscreen Reset */
-:fullscreen #display-view { padding: 0; margin: 0; background-color: var(--bg-color); }
+/* Display Board - Optimized for 1920x1080 Fullscreen */
+:fullscreen #display-view { padding: 0; margin: 0; background-color: var(--bg-color); height: 100vh; }
 :fullscreen .top-nav { display: none !important; }
+.menu-board { padding: 0; display: flex; flex-direction: column; height: 100%; max-width: 1920px; margin: 0 auto; overflow: hidden; position: relative; }
 
-.menu-board { padding: 3rem; display: flex; flex-direction: column; gap: 3rem; height: 100%; }
-.display-category h2 { color: var(--secondary-color); border-bottom: 2px solid #333; padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2.5rem; font-weight: 900; }
+/* ========================================= */
+/* UNIVERSAL DISPLAY COMPONENTS (Images, Icons) */
+/* ========================================= */
+.dish-image-container { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: #111; }
+.dish-image-container img { width: 100%; height: 100%; object-fit: cover; }
+.new-badge { position: absolute; top: 10px; left: 10px; background: #ffcc00; color: #000; padding: 4px 8px; border-radius: 40px; font-weight: 900; font-size: 0.8rem; }
+.type-icons { position: absolute; top: 10px; right: 10px; display: flex; gap: 5px; }
+.type-icons span { background: rgba(0,0,0,0.6); color: white; padding: 4px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
 
-/* Layout: Grid (Images on Top) */
-.layout-grid-top .display-dishes-list {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;
-}
-.layout-grid-top .display-dish { display: flex; flex-direction: column; gap: 1rem; }
-.layout-grid-top .dish-image-container { width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; }
+/* Universal Typography */
+.dish-title-ru { font-weight: 900; font-size: 1.8rem; color: var(--primary-color); line-height: 1.1;}
+.dish-title-kk { font-weight: 600; font-size: 1.2rem; color: var(--secondary-color); margin-top: 4px; opacity: 0.9;}
+.dish-price { font-weight: 900; font-size: 2.2rem; color: var(--secondary-color); letter-spacing: -1px; }
 
-/* Layout: List (Images on Side) */
-.layout-list-side .display-dishes-list {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-}
-.layout-list-side .display-dish { display: flex; flex-direction: row; gap: 1.5rem; align-items: center; }
-.layout-list-side .dish-image-container { width: 150px; flex-shrink: 0; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; }
+/* ========================================= */
+/* LAYOUT 1: VERTICAL SIDEBAR GRID (Image_0, Image_3) */
+/* ========================================= */
+.layout-1-sidebar-grid { display: grid; grid-template-columns: 180px 1fr; height: 100%; gap: 1rem; padding: 2rem;}
+.layout-1-sidebar-grid h2 { grid-row: 1 / -1; color: var(--primary-color); text-transform: uppercase; font-size: 8rem; font-weight: 900; writing-mode: vertical-rl; transform: rotate(180deg); opacity: 0.2; justify-self: center; border: none; padding: 0;}
+.layout-1-sidebar-grid .display-dishes-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; padding: 1rem 0;}
 
-/* Universal Image Specs */
-.dish-image-container img { width: 100%; height: 100%; object-fit: cover; background: #222; }
+.layout-1-sidebar-grid .display-dish { background: var(--card-bg); display: flex; flex-direction: column; gap: 1rem; padding: 1rem; border-radius: 12px; }
+.layout-1-sidebar-grid .type-icons { left: 10px; right: auto; top: 10px;}
+.layout-1-sidebar-grid .dish-info { text-align: center; }
 
-/* Typography Formatting */
-.dish-info { display: flex; flex-direction: column; flex: 1; }
-.dish-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem; }
-.dish-title-ru { font-weight: 800; font-size: 1.5rem; color: var(--primary-color); }
-.dish-price { font-weight: 900; font-size: 1.6rem; color: var(--secondary-color); }
-.dish-title-kk { font-size: 1.1rem; color: var(--secondary-color); opacity: 0.9; }
+/* ========================================= */
+/* LAYOUT 2: RED HEADER PANELS (Image_1, Image_2) */
+/* ========================================= */
+.layout-2-red-panels { display: grid; grid-template-rows: auto 1fr; gap: 2rem; padding: 0; overflow: hidden; height: 100%;}
+.layout-2-red-panels h2 { background: #dc3545; color: white; padding: 2rem; text-align: center; font-size: 3rem; font-weight: 900; border: none; margin: 0; position: sticky; top: 0;}
+.layout-2-red-panels .display-dishes-list { display: flex; flex-wrap: wrap; gap: 2rem; padding: 2rem; overflow-y: auto;}
 
-.dish-icons { margin-top: 0.5rem; display: flex; gap: 0.5rem; }
-.dish-icons span { font-size: 0.8rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
-.icon-vegan { background: #28a745; color: white; }
-.icon-beef { background: #8b0000; color: white; }
-.icon-chicken { background: #d2b48c; color: #000; }
+.layout-2-red-panels .display-dish { flex: 0 0 calc(50% - 1rem); background: #222; border-radius: 12px; display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; border-bottom: 2px solid #333; position: relative;}
+.layout-2-red-panels .dish-image-container { width: 150px; flex-shrink: 0; }
+.layout-2-red-panels .type-icons { position: static; margin-top: 10px;}
+.layout-2-red-panels .dish-price { background: #333; color: white; padding: 8px 16px; border-radius: 8px; font-size: 1.8rem;}
+
+/* DIAGONAL PRICE TAG (Optional effect for Layout 2) */
+.layout-2-red-panels .diagonal-price { position: absolute; bottom: 15px; right: 15px; background: #dc3545; color: white; font-weight: 900; font-size: 1.8rem; padding: 5px 15px; border-radius: 4px; transform: rotate(-5deg); box-shadow: 2px 2px 10px rgba(0,0,0,0.5);}
+
+/* ========================================= */
+/* LAYOUT 3: MINIMALIST COLUMN */
+/* ========================================= */
+.layout-3-minimalist { display: grid; grid-template-rows: auto 1fr; padding: 3rem;}
+.layout-3-minimalist h2 { color: var(--secondary-color); text-align: left; font-size: 3rem; font-weight: 900; margin-bottom: 3rem; padding-bottom: 1rem; border-bottom: 3px solid #333;}
+.layout-3-minimalist .display-dishes-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+
+.layout-3-minimalist .display-dish { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
+.layout-3-minimalist .dish-image-container { grid-column: 1 / -1; aspect-ratio: 16/9; margin-bottom: 0.5rem;}
+.layout-3-minimalist .dish-price { color: var(--primary-color); font-size: 1.8rem; text-align: right;}
+
+/* ========================================= */
+/* LAYOUT 4: MASONRY HYBRID (Adaptive) */
+/* ========================================= */
+.layout-4-masonry-hybrid { display: grid; grid-template-rows: auto 1fr; padding: 0; height: 100%;}
+.layout-4-masonry-hybrid h2 { background: var(--bg-color); color: var(--primary-color); padding: 2rem 3rem; border-bottom: 2px solid #333; font-size: 3rem; position: sticky; top: 0;}
+.layout-4-masonry-hybrid .display-dishes-list { columns: 3; column-gap: 2rem; padding: 2rem 3rem; overflow-y: auto;}
+
+.layout-4-masonry-hybrid .display-dish { break-inside: avoid; background: var(--card-bg); margin-bottom: 2rem; border-radius: 12px; display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; border: 1px solid #333;}
+.layout-4-masonry-hybrid .dish-header { display: flex; justify-content: space-between; align-items: start; }
+.layout-4-masonry-hybrid .dish-image-container { aspect-ratio: 1 / 1;}
