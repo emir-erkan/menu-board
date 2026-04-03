@@ -3,38 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Board Automation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Menu Board Automation | Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <nav class="top-nav">
-        <button id="btn-cms" class="active">CMS Editor</button>
-        <button id="btn-display">Monitor Display</button>
+        <div class="nav-left">
+            <button id="btn-cms" class="active">CMS Editor</button>
+            <button id="btn-display">Monitor Display</button>
+        </div>
+        <div class="nav-right" id="display-controls" style="display: none;">
+            <select id="active-monitor-select" class="monitor-dropdown"></select>
+            <button id="btn-fullscreen" class="accent-btn">⛶ Fullscreen View</button>
+        </div>
     </nav>
 
     <section id="cms-view" class="view-section active">
         <div class="cms-container">
             <div class="sidebar">
-                <h2>Global Settings</h2>
-                <label>Layout Style</label>
-                <select id="layout-select">
-                    <option value="grid-layout">Modern Grid</option>
-                    <option value="list-layout">Classic List</option>
-                </select>
+                <h2>System Settings</h2>
+                
+                <div class="setting-group">
+                    <label>Active Monitor</label>
+                    <select id="cms-monitor-select"></select>
+                    <button id="add-monitor-btn" class="secondary-btn">+ New Monitor</button>
+                </div>
 
-                <label>Primary Color</label>
-                <input type="color" id="color-select" value="#ff4500">
+                <div class="setting-group">
+                    <label>Layout Style</label>
+                    <select id="layout-select">
+                        <option value="layout-grid-top">Image Top, Grid</option>
+                        <option value="layout-list-side">Image Side, List</option>
+                    </select>
+                </div>
 
-                <label>Typography</label>
-                <select id="font-select">
-                    <option value="'Inter', sans-serif">Inter (Clean)</option>
-                    <option value="'Montserrat', sans-serif">Montserrat (Bold)</option>
-                </select>
+                <div class="setting-group">
+                    <label>Background Color</label>
+                    <input type="color" id="color-bg" value="#0f0f11">
+                    <label>Primary Color (RU Text / Accents)</label>
+                    <input type="color" id="color-primary" value="#ffffff">
+                    <label>Secondary Color (KK Text / Price)</label>
+                    <input type="color" id="color-secondary" value="#ff4500">
+                </div>
+
+                <div class="setting-group">
+                    <label>Typography</label>
+                    <select id="font-select">
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Montserrat', sans-serif">Montserrat</option>
+                    </select>
+                </div>
                 
                 <button id="add-category-btn" class="primary-btn">+ Add Dish Group</button>
-                <button id="save-data-btn" class="success-btn">Save Changes</button>
+                <button id="save-data-btn" class="success-btn">Save Database</button>
             </div>
 
             <div class="content-editor" id="categories-container">
@@ -43,7 +66,7 @@
     </section>
 
     <section id="display-view" class="view-section">
-        <div id="menu-board" class="menu-board grid-layout">
+        <div id="menu-board" class="menu-board">
             </div>
     </section>
 
