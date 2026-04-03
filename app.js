@@ -219,23 +219,28 @@ function renderDisplay() {
     containers.board.innerHTML = '';
 
     // Calculate total items across all groups on this monitor to divide screen space proportionally
-    const totalItemsOnMonitor = currentMonitor.categories.reduce((sum, cat) => sum + cat.items.length, 0);
+    const categories = currentMonitor.categories.filter(cat => cat.items.length > 0);
+    const totalItemsOnMonitor = categories.reduce((sum, cat) => sum + cat.items.length, 0);
+    if(categories.length === 0) return;
 
-    currentMonitor.categories.forEach(cat => {
+    // Determine smart column count to force groups to wrap elegantly
+    let numCols = 1;
+    if (totalItemsOnMonitor >= 15 || categories.length >= 4) numCols = Math.min(4, categories.length);
+    else if (totalItemsOnMonitor >= 8 || categories.length >= 3) numCols = Math.min(3, categories.length);
+    else if (totalItemsOnMonitor >= 4 || categories.length >= 2) numCols = Math.min(2, categories.length);
+
+    // Initializing Masonry Column Buckets
+    const columns = Array.from({length: numCols}, () => ({ weight: 0, html: '' }));
+
+    // Distribute categories into the column with the least weight
+    categories.forEach(cat => {
         const itemCount = cat.items.length;
-        if(itemCount === 0) return;
+        columns.sort((a, b) => a.weight - b.weight); // Pack into the emptiest column
+        const targetCol = columns[0];
         
-        const catDiv = document.createElement('div');
-        catDiv.className = 'display-category';
-        
-        // CSS Smart Fit Injectors:
-        // 1. Flex-Grow maps to the percentage of total items (e.g. 6 items takes 3x the vertical space of 2 items).
-        catDiv.style.flexGrow = (itemCount / totalItemsOnMonitor).toString();
-        
-        // 2. Fetch the perfect grid matrix to ensure everything wraps strictly inside the new flexible bounding box.
+        targetCol.weight += itemCount;
+
         const grid = calculateGridDimensions(itemCount);
-        catDiv.style.setProperty('--grid-cols', grid.c);
-        catDiv.style.setProperty('--grid-rows', grid.r);
 
         let dishesHtml = cat.items.map(item => {
             const iconsHtml = `
@@ -263,11 +268,22 @@ function renderDisplay() {
             `;
         }).join('');
 
-        catDiv.innerHTML = `
-            <h2>${cat.name_kk} / ${cat.name_ru}</h2>
-            <div class="display-dishes-list">${dishesHtml}</div>
+        // Apply flex grow to share vertical column space proportionally based on how many dishes are inside
+        targetCol.html += `
+            <div class="display-category" style="flex: ${itemCount}; --grid-cols: ${grid.c}; --grid-rows: ${grid.r};">
+                <h2>${cat.name_kk} / ${cat.name_ru}</h2>
+                <div class="display-dishes-list">${dishesHtml}</div>
+            </div>
         `;
-        containers.board.appendChild(catDiv);
+    });
+
+    // Render aggregated columns
+    columns.forEach(col => {
+        if (col.weight === 0) return;
+        const colDiv = document.createElement('div');
+        colDiv.className = 'board-column';
+        colDiv.innerHTML = col.html;
+        containers.board.appendChild(colDiv);
     });
 }
 
