@@ -4,7 +4,6 @@
     --secondary-color: #ff4500;
     --font-family: 'Inter', sans-serif;
     --card-bg: #1a1a1d;
-    --card-bg-vibrant: #ffaa00; /* For dynamic card accents */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -13,11 +12,12 @@ body {
     font-family: var(--font-family);
     background-color: var(--bg-color);
     color: var(--primary-color);
-    overflow-x: hidden;
+    overflow: hidden; /* Strictly prevent body scrolling */
     height: 100vh;
+    width: 100vw;
 }
 
-/* Navigation & Buttons */
+/* Navigation & CMS Sidebar (Kept identical for backend UX) */
 .top-nav { background: #000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; z-index: 100; position: relative;}
 .nav-left, .nav-right { display: flex; gap: 1rem; align-items: center; }
 button, .monitor-dropdown { cursor: pointer; font-family: inherit; border: none; border-radius: 4px; padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
@@ -28,18 +28,12 @@ button, .monitor-dropdown { cursor: pointer; font-family: inherit; border: none;
 .secondary-btn { background: #444; color: white; margin-top: 0.5rem; padding: 0.5rem; }
 .success-btn { background: #28a745; color: white; width: 100%; margin-top: 0.5rem; padding: 0.75rem; }
 .danger-btn { background: #dc3545; color: white; font-size: 0.8rem; padding: 0.4rem; border-radius: 4px; }
-
-/* Views */
 .view-section { display: none; height: calc(100vh - 65px); overflow-y: auto; }
 .view-section.active { display: block; }
-
-/* CMS Sidebar */
 .cms-container { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; padding: 2rem; height: 100%; }
 .setting-group { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #333; }
 .sidebar label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: #aaa; }
 .sidebar select, .sidebar input[type="color"] { width: 100%; padding: 0.5rem; background: var(--card-bg); color: white; border: 1px solid #333; border-radius: 4px; margin-bottom: 0.5rem;}
-
-/* CMS Content */
 .category-card { background: var(--card-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary-color); }
 .category-header { display: flex; gap: 1rem; margin-bottom: 1rem; }
 .category-header input { flex: 1; background: transparent; border: 1px solid #333; color: white; padding: 0.5rem; font-size: 1.2rem; }
@@ -48,69 +42,99 @@ button, .monitor-dropdown { cursor: pointer; font-family: inherit; border: none;
 .dish-row input[type="file"] { font-size: 0.7rem; color: #aaa; width: 100px; }
 .cms-dish-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
 
-/* Display Board - Optimized for 1920x1080 Fullscreen */
-:fullscreen #display-view { padding: 0; margin: 0; background-color: var(--bg-color); height: 100vh; }
+/* ========================================= */
+/* SMART AUTO-FIT MONITOR DISPLAY */
+/* ========================================= */
+
+:fullscreen #display-view { padding: 0; margin: 0; background-color: var(--bg-color); height: 100vh; overflow: hidden; }
 :fullscreen .top-nav { display: none !important; }
-.menu-board { padding: 0; display: flex; flex-direction: column; height: 100%; max-width: 1920px; margin: 0 auto; overflow: hidden; position: relative; }
 
-/* ========================================= */
-/* UNIVERSAL DISPLAY COMPONENTS (Images, Icons) */
-/* ========================================= */
-.dish-image-container { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: #111; }
+/* The master container is strictly bound to viewport */
+.menu-board {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100%; /* Adapts to fullscreen or preview window */
+    padding: 1vw;
+    gap: 1vw;
+    background: var(--bg-color);
+    overflow: hidden; /* Forces constraint */
+}
+
+/* Group container scales dynamically based on flex-grow set by JS */
+.display-category {
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* Critical: allows flex container to shrink past content size */
+    overflow: hidden;
+}
+
+/* Dynamic Grid computed by JS (rows x cols) */
+.display-dishes-list {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    gap: 1vw;
+    flex-grow: 1;
+    min-height: 0; /* Critical for shrinking */
+}
+
+/* Individual Dish Card bounding */
+.display-dish {
+    background: var(--card-bg);
+    border-radius: 12px;
+    display: flex;
+    overflow: hidden;
+    min-height: 0; 
+    min-width: 0;
+    position: relative;
+}
+
+/* Fluid Typography (scales with screen size and boxes) */
+.display-category h2 { font-size: min(2.5vw, 4vh); margin-bottom: 0.5vw; flex-shrink: 0; text-transform: uppercase; font-weight: 900; }
+.dish-info { display: flex; flex-direction: column; justify-content: center; flex-grow: 1; padding: 0.8vw; min-width: 0; }
+.dish-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5vw; }
+.dish-title-ru { font-weight: 900; font-size: min(1.4vw, 2.5vh); color: var(--primary-color); line-height: 1.1; white-space: normal; }
+.dish-title-kk { font-weight: 600; font-size: min(0.9vw, 1.8vh); color: var(--secondary-color); margin-top: 2px; }
+.dish-price { font-weight: 900; font-size: min(1.6vw, 3vh); color: var(--secondary-color); white-space: nowrap; }
+
+/* Fluid Images */
+.dish-image-container { position: relative; flex-shrink: 0; overflow: hidden; background: #111; }
 .dish-image-container img { width: 100%; height: 100%; object-fit: cover; }
-.new-badge { position: absolute; top: 10px; left: 10px; background: #ffcc00; color: #000; padding: 4px 8px; border-radius: 40px; font-weight: 900; font-size: 0.8rem; }
-.type-icons { position: absolute; top: 10px; right: 10px; display: flex; gap: 5px; }
-.type-icons span { background: rgba(0,0,0,0.6); color: white; padding: 4px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
-
-/* Universal Typography */
-.dish-title-ru { font-weight: 900; font-size: 1.8rem; color: var(--primary-color); line-height: 1.1;}
-.dish-title-kk { font-weight: 600; font-size: 1.2rem; color: var(--secondary-color); margin-top: 4px; opacity: 0.9;}
-.dish-price { font-weight: 900; font-size: 2.2rem; color: var(--secondary-color); letter-spacing: -1px; }
+.new-badge { position: absolute; top: 5%; left: 5%; background: #ffcc00; color: #000; padding: 2px 6px; border-radius: 20px; font-weight: 900; font-size: min(0.8vw, 1.5vh); }
+.type-icons { position: absolute; top: 5%; right: 5%; display: flex; gap: 3px; }
+.type-icons span { background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 4px; font-size: min(0.7vw, 1.2vh); font-weight: bold; }
 
 /* ========================================= */
-/* LAYOUT 1: VERTICAL SIDEBAR GRID (Image_0, Image_3) */
+/* LAYOUT 1: VERTICAL SIDEBAR GRID */
 /* ========================================= */
-.layout-1-sidebar-grid { display: grid; grid-template-columns: 180px 1fr; height: 100%; gap: 1rem; padding: 2rem;}
-.layout-1-sidebar-grid h2 { grid-row: 1 / -1; color: var(--primary-color); text-transform: uppercase; font-size: 8rem; font-weight: 900; writing-mode: vertical-rl; transform: rotate(180deg); opacity: 0.2; justify-self: center; border: none; padding: 0;}
-.layout-1-sidebar-grid .display-dishes-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; padding: 1rem 0;}
-
-.layout-1-sidebar-grid .display-dish { background: var(--card-bg); display: flex; flex-direction: column; gap: 1rem; padding: 1rem; border-radius: 12px; }
-.layout-1-sidebar-grid .type-icons { left: 10px; right: auto; top: 10px;}
-.layout-1-sidebar-grid .dish-info { text-align: center; }
+.layout-1-sidebar-grid .display-category { flex-direction: row; gap: 1vw; }
+.layout-1-sidebar-grid h2 { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: min(5vw, 8vh); opacity: 0.2; border: none; }
+.layout-1-sidebar-grid .display-dish { flex-direction: column; align-items: center; padding: 0.5vw; }
+.layout-1-sidebar-grid .dish-image-container { height: 50%; aspect-ratio: 1/1; border-radius: 50%; margin-top: 0.5vw; }
+.layout-1-sidebar-grid .dish-info { text-align: center; align-items: center; }
 
 /* ========================================= */
-/* LAYOUT 2: RED HEADER PANELS (Image_1, Image_2) */
+/* LAYOUT 2: RED HEADER PANELS */
 /* ========================================= */
-.layout-2-red-panels { display: grid; grid-template-rows: auto 1fr; gap: 2rem; padding: 0; overflow: hidden; height: 100%;}
-.layout-2-red-panels h2 { background: #dc3545; color: white; padding: 2rem; text-align: center; font-size: 3rem; font-weight: 900; border: none; margin: 0; position: sticky; top: 0;}
-.layout-2-red-panels .display-dishes-list { display: flex; flex-wrap: wrap; gap: 2rem; padding: 2rem; overflow-y: auto;}
-
-.layout-2-red-panels .display-dish { flex: 0 0 calc(50% - 1rem); background: #222; border-radius: 12px; display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; border-bottom: 2px solid #333; position: relative;}
-.layout-2-red-panels .dish-image-container { width: 150px; flex-shrink: 0; }
-.layout-2-red-panels .type-icons { position: static; margin-top: 10px;}
-.layout-2-red-panels .dish-price { background: #333; color: white; padding: 8px 16px; border-radius: 8px; font-size: 1.8rem;}
-
-/* DIAGONAL PRICE TAG (Optional effect for Layout 2) */
-.layout-2-red-panels .diagonal-price { position: absolute; bottom: 15px; right: 15px; background: #dc3545; color: white; font-weight: 900; font-size: 1.8rem; padding: 5px 15px; border-radius: 4px; transform: rotate(-5deg); box-shadow: 2px 2px 10px rgba(0,0,0,0.5);}
+.layout-2-red-panels .display-category { border: 2px solid #333; border-radius: 12px; }
+.layout-2-red-panels h2 { background: #dc3545; color: white; padding: 0.5vw 1.5vw; text-align: left; margin: 0; }
+.layout-2-red-panels .display-dishes-list { padding: 1vw; background: #0a0a0c; }
+.layout-2-red-panels .display-dish { flex-direction: row; align-items: center; background: #1a1a1d; padding-right: 1vw; border-bottom: 2px solid #333; border-radius: 8px;}
+.layout-2-red-panels .dish-image-container { height: 100%; aspect-ratio: 1/1; margin-right: 1vw; }
 
 /* ========================================= */
-/* LAYOUT 3: MINIMALIST COLUMN */
+/* LAYOUT 3: MINIMALIST (Clean Row) */
 /* ========================================= */
-.layout-3-minimalist { display: grid; grid-template-rows: auto 1fr; padding: 3rem;}
-.layout-3-minimalist h2 { color: var(--secondary-color); text-align: left; font-size: 3rem; font-weight: 900; margin-bottom: 3rem; padding-bottom: 1rem; border-bottom: 3px solid #333;}
-.layout-3-minimalist .display-dishes-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
-
-.layout-3-minimalist .display-dish { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
-.layout-3-minimalist .dish-image-container { grid-column: 1 / -1; aspect-ratio: 16/9; margin-bottom: 0.5rem;}
-.layout-3-minimalist .dish-price { color: var(--primary-color); font-size: 1.8rem; text-align: right;}
+.layout-3-minimalist .display-category h2 { color: var(--secondary-color); border-bottom: 2px solid #333; padding-bottom: 0.5vw; }
+.layout-3-minimalist .display-dish { flex-direction: row; background: transparent; align-items: center; border-bottom: 1px dashed #333; border-radius: 0; }
+.layout-3-minimalist .dish-image-container { height: 85%; aspect-ratio: 16/9; border-radius: 8px; margin-right: 1vw; }
+.layout-3-minimalist .dish-header { flex-direction: column; }
+.layout-3-minimalist .dish-price { font-size: min(1.8vw, 3.5vh); color: var(--primary-color); }
 
 /* ========================================= */
-/* LAYOUT 4: MASONRY HYBRID (Adaptive) */
+/* LAYOUT 4: CARD HYBRID */
 /* ========================================= */
-.layout-4-masonry-hybrid { display: grid; grid-template-rows: auto 1fr; padding: 0; height: 100%;}
-.layout-4-masonry-hybrid h2 { background: var(--bg-color); color: var(--primary-color); padding: 2rem 3rem; border-bottom: 2px solid #333; font-size: 3rem; position: sticky; top: 0;}
-.layout-4-masonry-hybrid .display-dishes-list { columns: 3; column-gap: 2rem; padding: 2rem 3rem; overflow-y: auto;}
-
-.layout-4-masonry-hybrid .display-dish { break-inside: avoid; background: var(--card-bg); margin-bottom: 2rem; border-radius: 12px; display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; border: 1px solid #333;}
-.layout-4-masonry-hybrid .dish-header { display: flex; justify-content: space-between; align-items: start; }
-.layout-4-masonry-hybrid .dish-image-container { aspect-ratio: 1 / 1;}
+.layout-4-masonry-hybrid .display-category { background: var(--card-bg); border-radius: 16px; padding: 1vw; }
+.layout-4-masonry-hybrid .display-dish { flex-direction: column; background: #000; border: 1px solid #333; }
+.layout-4-masonry-hybrid .dish-image-container { width: 100%; height: 50%; border-radius: 0; }
