@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Board Automation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <button id="btn-cms" class="active">CMS Editor</button>
+        <button id="btn-display">Monitor Display</button>
+    </nav>
+
+    <section id="cms-view" class="view-section active">
+        <div class="cms-container">
+            <div class="sidebar">
+                <h2>Global Settings</h2>
+                <label>Layout Style</label>
+                <select id="layout-select">
+                    <option value="grid-layout">Modern Grid</option>
+                    <option value="list-layout">Classic List</option>
+                </select>
+
+                <label>Primary Color</label>
+                <input type="color" id="color-select" value="#ff4500">
+
+                <label>Typography</label>
+                <select id="font-select">
+                    <option value="'Inter', sans-serif">Inter (Clean)</option>
+                    <option value="'Montserrat', sans-serif">Montserrat (Bold)</option>
+                </select>
+                
+                <button id="add-category-btn" class="primary-btn">+ Add Dish Group</button>
+                <button id="save-data-btn" class="success-btn">Save Changes</button>
+            </div>
+
+            <div class="content-editor" id="categories-container">
+                </div>
+        </div>
+    </section>
+
+    <section id="display-view" class="view-section">
+        <div id="menu-board" class="menu-board grid-layout">
+            </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>

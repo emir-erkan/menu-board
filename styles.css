@@ -1,0 +1,172 @@
+:root {
+    --primary-color: #ff4500;
+    --bg-color: #0f0f11;
+    --text-color: #ffffff;
+    --font-family: 'Inter', sans-serif;
+    --card-bg: #1a1a1d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.top-nav {
+    background: #000;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.top-nav button {
+    background: #333;
+    color: #fff;
+}
+
+.top-nav button.active {
+    background: var(--primary-color);
+}
+
+.primary-btn { background: #333; color: white; width: 100%; margin-top: 1rem; padding: 0.75rem; }
+.success-btn { background: #28a745; color: white; width: 100%; margin-top: 0.5rem; padding: 0.75rem; }
+
+/* Views */
+.view-section {
+    display: none;
+    min-height: 100vh;
+}
+.view-section.active {
+    display: block;
+}
+
+/* CMS Layout */
+.cms-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.sidebar label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.sidebar select, .sidebar input[type="color"] {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--card-bg);
+    color: white;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+.category-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.category-header input {
+    background: transparent;
+    border: 1px solid #333;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.dish-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 100px auto;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    background: #000;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.dish-row input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #333;
+    color: white;
+    padding: 0.25rem;
+}
+
+/* Monitor Display Layouts */
+.menu-board {
+    padding: 3rem;
+    display: grid;
+    gap: 2rem;
+}
+
+/* Grid Layout: Responsive columns based on screen width */
+.menu-board.grid-layout {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* List Layout: Masonry or linear flow */
+.menu-board.list-layout {
+    grid-template-columns: 1fr 1fr;
+}
+
+.display-category h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.display-dish {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+}
+
+.dish-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.dish-title-ru { font-weight: 600; }
+.dish-title-kk { font-size: 0.9rem; color: #aaa; }
+
+.dish-icons span {
+    font-size: 0.8rem;
+    margin-left: 4px;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.icon-vegan { background: #28a745; color: white; }
+.icon-beef { background: #8b0000; color: white; }
+.icon-chicken { background: #d2b48c; color: black; }
