@@ -10,13 +10,13 @@ let appData = {
             id: 1, name: "Monitor 1 (Pizzas)", layout: 'layout-1-sidebar-grid',
             categories: [
                 { name_ru: "Пиццы", name_kk: "Пиццалар", items: [
-                    { name_ru: "Маргарита", name_kk: "Маргарита", price: "2500", image: "https://placehold.co/400x400/222/FFF?text=Pizza+1", vegan: true, beef: false, chicken: false, isNew: true },
-                    { name_ru: "Пепперони", name_kk: "Пепперони", price: "3000", image: "https://placehold.co/400x400/222/FFF?text=Pizza+2", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Мясная", name_kk: "Етті", price: "3500", image: "https://placehold.co/400x400/222/FFF?text=Pizza+3", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Куриная", name_kk: "Тауық етімен", price: "2800", image: "https://placehold.co/400x400/222/FFF?text=Pizza+4", vegan: false, beef: false, chicken: true, isNew: false },
-                    { name_ru: "Четыре сыра", name_kk: "Төрт ірімшік", price: "3200", image: "https://placehold.co/400x400/222/FFF?text=Pizza+5", vegan: true, beef: false, chicken: false, isNew: false },
-                    { name_ru: "Грибная", name_kk: "Саңырауқұлақпен", price: "2700", image: "https://placehold.co/400x400/222/FFF?text=Pizza+6", vegan: true, beef: false, chicken: false, isNew: true },
-                    { name_ru: "Барбекю", name_kk: "Барбекю", price: "3400", image: "https://placehold.co/400x400/222/FFF?text=Pizza+7", vegan: false, beef: true, chicken: false, isNew: false }
+                    { name_ru: "Маргарита", name_kk: "Маргарита", price: "2500", image: "burger.png", vegan: true, beef: false, chicken: false, isNew: true },
+                    { name_ru: "Пепперони", name_kk: "Пепперони", price: "3000", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Мясная", name_kk: "Етті", price: "3500", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Куриная", name_kk: "Тауық етімен", price: "2800", image: "pizza.png", vegan: false, beef: false, chicken: true, isNew: false },
+                    { name_ru: "Четыре сыра", name_kk: "Төрт ірімшік", price: "3200", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: false },
+                    { name_ru: "Грибная", name_kk: "Саңырауқұлақпен", price: "2700", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: true },
+                    { name_ru: "Барбекю", name_kk: "Барбекю", price: "3400", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false }
                 ]}
             ]
         },
@@ -24,14 +24,14 @@ let appData = {
             id: 2, name: "Monitor 2 (Burgers & Durums)", layout: 'layout-4-masonry-hybrid',
             categories: [
                 { name_ru: "Бургеры", name_kk: "Бургерлер", items: [
-                    { name_ru: "Классический Бургер", name_kk: "Классикалық Бургер", price: "1500", image: "https://placehold.co/400x400/222/FFF?text=Burger+1", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Чикенбургер", name_kk: "Чикенбургер", price: "1400", image: "https://placehold.co/400x400/222/FFF?text=Burger+2", vegan: false, beef: false, chicken: true, isNew: false }
+                    { name_ru: "Классический Бургер", name_kk: "Классикалық Бургер", price: "1500", image: "burger.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Чикенбургер", name_kk: "Чикенбургер", price: "1400", image: "burger.png", vegan: false, beef: false, chicken: true, isNew: false }
                 ]},
                 { name_ru: "Дюрюмы", name_kk: "Дүрүмдер", items: [
-                    { name_ru: "Дюрюм с говядиной", name_kk: "Сиыр етінен дүрүм", price: "1800", image: "https://placehold.co/400x400/222/FFF?text=Durum+1", vegan: false, beef: true, chicken: false, isNew: true },
-                    { name_ru: "Дюрюм с курицей", name_kk: "Тауық етінен дүрүм", price: "1600", image: "https://placehold.co/400x400/222/FFF?text=Durum+2", vegan: false, beef: false, chicken: true, isNew: false },
-                    { name_ru: "Дюрюм Микс", name_kk: "Аралас дүрүм", price: "1900", image: "https://placehold.co/400x400/222/FFF?text=Durum+3", vegan: false, beef: true, chicken: true, isNew: false },
-                    { name_ru: "Острый Дюрюм", name_kk: "Ащы дүрүм", price: "1700", image: "https://placehold.co/400x400/222/FFF?text=Durum+4", vegan: false, beef: true, chicken: false, isNew: false }
+                    { name_ru: "Дюрюм с говядиной", name_kk: "Сиыр етінен дүрүм", price: "1800", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: true },
+                    { name_ru: "Дюрюм с курицей", name_kk: "Тауық етінен дүрүм", price: "1600", image: "durum.png", vegan: false, beef: false, chicken: true, isNew: false },
+                    { name_ru: "Дюрюм Микс", name_kk: "Аралас дүрүм", price: "1900", image: "durum.png", vegan: false, beef: true, chicken: true, isNew: false },
+                    { name_ru: "Острый Дюрюм", name_kk: "Ащы дүрүм", price: "1700", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false }
                 ]}
             ]
         },
@@ -39,13 +39,13 @@ let appData = {
             id: 3, name: "Monitor 3 (Pides)", layout: 'layout-2-red-panels',
             categories: [
                 { name_ru: "Пиде", name_kk: "Пиде", items: [
-                    { name_ru: "Пиде с фаршем", name_kk: "Фаршпен пиде", price: "2200", image: "https://placehold.co/400x400/222/FFF?text=Pide+1", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Пиде с сыром", name_kk: "Ірімшікпен пиде", price: "2000", image: "https://placehold.co/400x400/222/FFF?text=Pide+2", vegan: true, beef: false, chicken: false, isNew: false },
-                    { name_ru: "Пиде с мясом кубиками", name_kk: "Кесек етпен пиде", price: "2500", image: "https://placehold.co/400x400/222/FFF?text=Pide+3", vegan: false, beef: true, chicken: false, isNew: true },
-                    { name_ru: "Пиде с сужуком", name_kk: "Шұжықпен пиде", price: "2400", image: "https://placehold.co/400x400/222/FFF?text=Pide+4", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Микс Пиде", name_kk: "Аралас пиде", price: "2600", image: "https://placehold.co/400x400/222/FFF?text=Pide+5", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Пиде с курицей", name_kk: "Тауық етімен пиде", price: "2100", image: "https://placehold.co/400x400/222/FFF?text=Pide+6", vegan: false, beef: false, chicken: true, isNew: false },
-                    { name_ru: "Вегетарианское Пиде", name_kk: "Вегетариандық пиде", price: "1900", image: "https://placehold.co/400x400/222/FFF?text=Pide+7", vegan: true, beef: false, chicken: false, isNew: false }
+                    { name_ru: "Пиде с фаршем", name_kk: "Фаршпен пиде", price: "2200", image: "burger.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Пиде с сыром", name_kk: "Ірімшікпен пиде", price: "2000", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: false },
+                    { name_ru: "Пиде с мясом кубиками", name_kk: "Кесек етпен пиде", price: "2500", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: true },
+                    { name_ru: "Пиде с сужуком", name_kk: "Шұжықпен пиде", price: "2400", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Микс Пиде", name_kk: "Аралас пиде", price: "2600", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Пиде с курицей", name_kk: "Тауық етімен пиде", price: "2100", image: "pizza.png", vegan: false, beef: false, chicken: true, isNew: false },
+                    { name_ru: "Вегетарианское Пиде", name_kk: "Вегетариандық пиде", price: "1900", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: false }
                 ]}
             ]
         },
@@ -53,16 +53,16 @@ let appData = {
             id: 4, name: "Monitor 4 (Mangal Doners)", layout: 'layout-3-minimalist',
             categories: [
                 { name_ru: "Мангал Донеры", name_kk: "Манғал Донерлер", items: [
-                    { name_ru: "Донер Мангал Классик", name_kk: "Классикалық Манғал Донер", price: "1800", image: "https://placehold.co/400x400/222/FFF?text=Doner+1", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Донер Мангал Куриный", name_kk: "Тауық Манғал Донер", price: "1600", image: "https://placehold.co/400x400/222/FFF?text=Doner+2", vegan: false, beef: false, chicken: true, isNew: false },
-                    { name_ru: "Донер с сыром", name_kk: "Ірімшікпен донер", price: "1900", image: "https://placehold.co/400x400/222/FFF?text=Doner+3", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Острый Донер", name_kk: "Ащы донер", price: "1850", image: "https://placehold.co/400x400/222/FFF?text=Doner+4", vegan: false, beef: true, chicken: false, isNew: true },
-                    { name_ru: "Мега Донер", name_kk: "Мега Донер", price: "2500", image: "https://placehold.co/400x400/222/FFF?text=Doner+5", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Мини Донер", name_kk: "Мини Донер", price: "1200", image: "https://placehold.co/400x400/222/FFF?text=Doner+6", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Донер на тарелке", name_kk: "Тәрелкедегі донер", price: "2200", image: "https://placehold.co/400x400/222/FFF?text=Doner+7", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Искендер Донер", name_kk: "Ескендір Донер", price: "2800", image: "https://placehold.co/400x400/222/FFF?text=Doner+8", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Донер с халапеньо", name_kk: "Халапеньомен донер", price: "1950", image: "https://placehold.co/400x400/222/FFF?text=Doner+9", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Фирменный Мангал Донер", name_kk: "Фирмалық Манғал Донер", price: "2400", image: "https://placehold.co/400x400/222/FFF?text=Doner+10", vegan: false, beef: true, chicken: true, isNew: false }
+                    { name_ru: "Донер Мангал Классик", name_kk: "Классикалық Манғал Донер", price: "1800", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Донер Мангал Куриный", name_kk: "Тауық Манғал Донер", price: "1600", image: "durum.png", vegan: false, beef: false, chicken: true, isNew: false },
+                    { name_ru: "Донер с сыром", name_kk: "Ірімшікпен донер", price: "1900", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Острый Донер", name_kk: "Ащы донер", price: "1850", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: true },
+                    { name_ru: "Мега Донер", name_kk: "Мега Донер", price: "2500", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Мини Донер", name_kk: "Мини Донер", price: "1200", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Донер на тарелке", name_kk: "Тәрелкедегі донер", price: "2200", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Искендер Донер", name_kk: "Ескендір Донер", price: "2800", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Донер с халапеньо", name_kk: "Халапеньомен донер", price: "1950", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Фирменный Мангал Донер", name_kk: "Фирмалық Манғал Донер", price: "2400", image: "durum.png", vegan: false, beef: true, chicken: true, isNew: false }
                 ]}
             ]
         }
@@ -146,7 +146,7 @@ function renderCms() {
         catDiv.className = 'category-card';
         let itemsHtml = cat.items.map((item, itemIndex) => `
             <div class="dish-row">
-                <img src="${item.image || 'https://placehold.co/100x100?text=No+Img'}" class="cms-dish-preview">
+                <img src="${item.image || 'pizza.png'}" class="cms-dish-preview">
                 <input type="file" accept="image/*" onchange="handleImageUpload(event, ${catIndex}, ${itemIndex})">
                 <div>
                     <input type="text" placeholder="RU Name" value="${item.name_ru}" onchange="updateDish(${catIndex}, ${itemIndex}, 'name_ru', this.value)">
@@ -244,7 +244,7 @@ function renderDisplay() {
             return `
             <div class="display-dish">
                 <div class="dish-image-container">
-                    <img src="${item.image || 'https://placehold.co/600x600/222/FFF?text=No+Image'}" alt="${item.name_ru}">
+                    <img src="${item.image || 'pizza.png'}" alt="${item.name_ru}">
                     ${iconsHtml}
                 </div>
                 <div class="dish-info">
