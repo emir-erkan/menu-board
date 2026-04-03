@@ -10,13 +10,13 @@ let appData = {
             id: 1, name: "Monitor 1 (Pizzas)", layout: 'layout-1-sidebar-grid',
             categories: [
                 { name_ru: "Пиццы", name_kk: "Пиццалар", items: [
-                    { name_ru: "Маргарита", name_kk: "Маргарита", price: "2500", image: "burger.png", vegan: true, beef: false, chicken: false, isNew: true },
-                    { name_ru: "Пепперони", name_kk: "Пепперони", price: "3000", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Маргарита", name_kk: "Маргарита", price: "2500", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: true },
+                    { name_ru: "Пепперони", name_kk: "Пепперони", price: "3000", image: "pizza2.png", vegan: false, beef: true, chicken: false, isNew: false },
                     { name_ru: "Мясная", name_kk: "Етті", price: "3500", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Куриная", name_kk: "Тауық етімен", price: "2800", image: "pizza.png", vegan: false, beef: false, chicken: true, isNew: false },
+                    { name_ru: "Куриная", name_kk: "Тауық етімен", price: "2800", image: "pizza2.png", vegan: false, beef: false, chicken: true, isNew: false },
                     { name_ru: "Четыре сыра", name_kk: "Төрт ірімшік", price: "3200", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: false },
-                    { name_ru: "Грибная", name_kk: "Саңырауқұлақпен", price: "2700", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: true },
-                    { name_ru: "Барбекю", name_kk: "Барбекю", price: "3400", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false }
+                    { name_ru: "Грибная", name_kk: "Саңырауқұлақпен", price: "2700", image: "pizza2.png", vegan: true, beef: false, chicken: false, isNew: true },
+                    { name_ru: "Кола Комбо", name_kk: "Кола Комбо", price: "3400", image: "drink.png", vegan: false, beef: true, chicken: false, isNew: false }
                 ]}
             ]
         },
@@ -25,7 +25,8 @@ let appData = {
             categories: [
                 { name_ru: "Бургеры", name_kk: "Бургерлер", items: [
                     { name_ru: "Классический Бургер", name_kk: "Классикалық Бургер", price: "1500", image: "burger.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Чикенбургер", name_kk: "Чикенбургер", price: "1400", image: "burger.png", vegan: false, beef: false, chicken: true, isNew: false }
+                    { name_ru: "Дабл Чизбургер", name_kk: "Екі есе Чизбургер", price: "1800", image: "burger2.png", vegan: false, beef: true, chicken: false, isNew: true },
+                    { name_ru: "Чикенбургер Комбо", name_kk: "Чикенбургер Комбо", price: "1400", image: "drink.png", vegan: false, beef: false, chicken: true, isNew: false }
                 ]},
                 { name_ru: "Дюрюмы", name_kk: "Дүрүмдер", items: [
                     { name_ru: "Дюрюм с говядиной", name_kk: "Сиыр етінен дүрүм", price: "1800", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: true },
@@ -39,13 +40,13 @@ let appData = {
             id: 3, name: "Monitor 3 (Pides)", layout: 'layout-2-red-panels',
             categories: [
                 { name_ru: "Пиде", name_kk: "Пиде", items: [
-                    { name_ru: "Пиде с фаршем", name_kk: "Фаршпен пиде", price: "2200", image: "burger.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Пиде с сыром", name_kk: "Ірімшікпен пиде", price: "2000", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: false },
-                    { name_ru: "Пиде с мясом кубиками", name_kk: "Кесек етпен пиде", price: "2500", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: true },
-                    { name_ru: "Пиде с сужуком", name_kk: "Шұжықпен пиде", price: "2400", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Микс Пиде", name_kk: "Аралас пиде", price: "2600", image: "pizza.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Пиде с курицей", name_kk: "Тауық етімен пиде", price: "2100", image: "pizza.png", vegan: false, beef: false, chicken: true, isNew: false },
-                    { name_ru: "Вегетарианское Пиде", name_kk: "Вегетариандық пиде", price: "1900", image: "pizza.png", vegan: true, beef: false, chicken: false, isNew: false }
+                    { name_ru: "Пиде с фаршем", name_kk: "Фаршпен пиде", price: "2200", image: "pide.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Пиде с сыром", name_kk: "Ірімшікпен пиде", price: "2000", image: "pide.png", vegan: true, beef: false, chicken: false, isNew: false },
+                    { name_ru: "Пиде с мясом кубиками", name_kk: "Кесек етпен пиде", price: "2500", image: "pide.png", vegan: false, beef: true, chicken: false, isNew: true },
+                    { name_ru: "Пиде с сужуком", name_kk: "Шұжықпен пиде", price: "2400", image: "pide.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Микс Пиде", name_kk: "Аралас пиде", price: "2600", image: "pide.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Пиде с курицей", name_kk: "Тауық етімен пиде", price: "2100", image: "pide.png", vegan: false, beef: false, chicken: true, isNew: false },
+                    { name_ru: "Вегетарианское Пиде", name_kk: "Вегетариандық пиде", price: "1900", image: "pide.png", vegan: true, beef: false, chicken: false, isNew: false }
                 ]}
             ]
         },
@@ -53,16 +54,15 @@ let appData = {
             id: 4, name: "Monitor 4 (Mangal Doners)", layout: 'layout-3-minimalist',
             categories: [
                 { name_ru: "Мангал Донеры", name_kk: "Манғал Донерлер", items: [
-                    { name_ru: "Донер Мангал Классик", name_kk: "Классикалық Манғал Донер", price: "1800", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Донер Мангал Куриный", name_kk: "Тауық Манғал Донер", price: "1600", image: "durum.png", vegan: false, beef: false, chicken: true, isNew: false },
-                    { name_ru: "Донер с сыром", name_kk: "Ірімшікпен донер", price: "1900", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Донер Мангал Классик", name_kk: "Классикалық Манғал Донер", price: "1800", image: "doner.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Донер Мангал Куриный", name_kk: "Тауық Манғал Донер", price: "1600", image: "doner.png", vegan: false, beef: false, chicken: true, isNew: false },
+                    { name_ru: "Донер с сыром", name_kk: "Ірімшікпен донер", price: "1900", image: "doner.png", vegan: false, beef: true, chicken: false, isNew: false },
                     { name_ru: "Острый Донер", name_kk: "Ащы донер", price: "1850", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: true },
-                    { name_ru: "Мега Донер", name_kk: "Мега Донер", price: "2500", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Мега Донер", name_kk: "Мега Донер", price: "2500", image: "doner.png", vegan: false, beef: true, chicken: false, isNew: false },
                     { name_ru: "Мини Донер", name_kk: "Мини Донер", price: "1200", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Донер на тарелке", name_kk: "Тәрелкедегі донер", price: "2200", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Искендер Донер", name_kk: "Ескендір Донер", price: "2800", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Донер с халапеньо", name_kk: "Халапеньомен донер", price: "1950", image: "durum.png", vegan: false, beef: true, chicken: false, isNew: false },
-                    { name_ru: "Фирменный Мангал Донер", name_kk: "Фирмалық Манғал Донер", price: "2400", image: "durum.png", vegan: false, beef: true, chicken: true, isNew: false }
+                    { name_ru: "Донер на тарелке", name_kk: "Тәрелкедегі донер", price: "2200", image: "doner.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Искендер Комбо", name_kk: "Ескендір Комбо", price: "2800", image: "drink.png", vegan: false, beef: true, chicken: false, isNew: false },
+                    { name_ru: "Донер с халапеньо", name_kk: "Халапеньомен донер", price: "1950", image: "doner.png", vegan: false, beef: true, chicken: false, isNew: false }
                 ]}
             ]
         }
@@ -131,11 +131,16 @@ function updateMonitorDropdowns() {
         if (idx === currentMonitorIndex) { option1.selected = true; option2.selected = true; }
         cmsSelect.add(option1); displaySelect.add(option2);
     });
+    if(appData.monitors.length > 0) {
+        const layoutSelect = document.getElementById('layout-select');
+        if(layoutSelect) layoutSelect.value = appData.monitors[currentMonitorIndex].layout || 'layout-standard';
+    }
 }
 
 document.getElementById('cms-monitor-select').addEventListener('change', (e) => { currentMonitorIndex = parseInt(e.target.value); document.getElementById('active-monitor-select').value = currentMonitorIndex; updateMonitorDropdowns(); renderCms(); });
 document.getElementById('active-monitor-select').addEventListener('change', (e) => { currentMonitorIndex = parseInt(e.target.value); document.getElementById('cms-monitor-select').value = currentMonitorIndex; updateMonitorDropdowns(); renderDisplay(); });
 ['color-bg', 'color-primary', 'color-secondary', 'font-select', 'color-ru-title', 'color-kz-title', 'color-price', 'color-dish-bg', 'color-group-bg', 'color-title-bg'].forEach(id => { document.getElementById(id).addEventListener('change', (e) => { const key = id === 'font-select' ? 'font' : id.replace(/-/g, '_'); appData.settings[key] = e.target.value; applyGlobalSettings(); }); });
+document.getElementById('layout-select').addEventListener('change', (e) => { appData.monitors[currentMonitorIndex].layout = e.target.value; renderDisplay(); });
 
 function renderCms() {
     containers.categories.innerHTML = '';
@@ -210,7 +215,7 @@ function renderDisplay() {
     const currentMonitor = appData.monitors[currentMonitorIndex];
     if(!currentMonitor) return;
 
-    containers.board.className = `menu-board`;
+    containers.board.className = `menu-board ${currentMonitor.layout || 'layout-standard'}`;
     containers.board.innerHTML = '';
 
     // Calculate total items across all groups on this monitor to divide screen space proportionally
@@ -249,9 +254,9 @@ function renderDisplay() {
                 </div>
                 <div class="dish-info">
                     <div class="dish-header">
-                        <span class="dish-title-ru">${item.name_ru}</span>
+                        <span class="dish-title-kk">${item.name_kk}</span>
                     </div>
-                    <span class="dish-title-kk">${item.name_kk}</span>
+                    <span class="dish-title-ru">${item.name_ru}</span>
                     <span class="dish-price">${item.price} ₸</span>
                 </div>
             </div>
@@ -259,7 +264,7 @@ function renderDisplay() {
         }).join('');
 
         catDiv.innerHTML = `
-            <h2>${cat.name_ru} / ${cat.name_kk}</h2>
+            <h2>${cat.name_kk} / ${cat.name_ru}</h2>
             <div class="display-dishes-list">${dishesHtml}</div>
         `;
         containers.board.appendChild(catDiv);

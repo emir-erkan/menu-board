@@ -74,7 +74,8 @@ button, .monitor-dropdown { cursor: pointer; font-family: inherit; border: none;
     display: flex;
     flex-direction: row; /* Switch to side-by-side by default, much better for screen estate when categories vary */
     width: 100vw;
-    height: 100%; /* Adapts to fullscreen or preview window */
+    height: 100vh; /* Strictly bound to screen */
+    max-height: 100vh;
     padding: 1vw;
     gap: 1vw;
     background: var(--bg-color);
@@ -86,6 +87,7 @@ button, .monitor-dropdown { cursor: pointer; font-family: inherit; border: none;
     display: flex;
     flex-direction: column;
     min-height: 0; /* Critical: allows flex container to shrink past content size */
+    max-height: 100%;
     overflow: hidden;
     background: var(--color-group-bg);
     border-radius: 12px;
@@ -107,29 +109,44 @@ button, .monitor-dropdown { cursor: pointer; font-family: inherit; border: none;
 .display-dish {
     flex: 0 0 calc((100% - (var(--grid-cols) - 1) * 1vw) / var(--grid-cols));
     max-width: calc((100% - (var(--grid-cols) - 1) * 1vw) / var(--grid-cols));
+    height: calc((100% - (var(--grid-rows) - 1) * 1vw) / var(--grid-rows));
+    max-height: calc((100% - (var(--grid-rows) - 1) * 1vw) / var(--grid-rows));
     background: var(--color-dish-bg, var(--card-bg));
     border-radius: 12px;
     display: flex;
     flex-direction: column; /* Emphasize layout: Image top, info bottom */
     align-items: center;
     overflow: hidden;
-    min-height: 0; 
-    min-width: 0;
-    position: relative;
     padding: 0.5vw;
 }
 
-/* Fluid Typography (scales with screen size and boxes) */
-.display-category h2 { font-size: min(2vw, 3.5vh); margin-bottom: 1vw; flex-shrink: 0; text-transform: uppercase; font-weight: 900; background: var(--color-title-bg); padding: 0.5vw 1vw; border-radius: 6px; color: var(--color-ru-title); display: inline-block; text-align: center; }
-.dish-info { display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; flex-grow: 1; padding: 1vw 0.5vw; min-width: 0; width: 100%; gap: 0.5vw;}
-.dish-header { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.2vw; }
-.dish-title-ru { font-weight: 900; font-size: min(1.3vw, 2.3vh); color: var(--color-ru-title, var(--primary-color)); line-height: 1.1; white-space: normal; }
-.dish-title-kk { font-weight: 600; font-size: min(0.9vw, 1.8vh); color: var(--color-kz-title, var(--secondary-color)); margin-top: 2px; }
-.dish-price { font-weight: 900; font-size: min(1.5vw, 2.8vh); color: var(--color-price, var(--secondary-color)); margin-top: auto; }
+/* Fluid Typography (scales with grid rows to forbid overflow) */
+.display-category h2 { font-size: min(2vw, 3.5vh); margin-bottom: 1vw; flex-shrink: 0; text-transform: uppercase; font-weight: 900; background: var(--color-title-bg); padding: 0.5vw 1vw; border-radius: 6px; color: var(--color-kz-title); display: inline-block; text-align: center; } /* Kazakh title colored */
+.dish-info { display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; flex-grow: 1; padding: 0.5vw; min-width: 0; width: 100%; gap: 0.2vw; min-height: 0;} /* min-height 0 to shrink */
+.dish-header { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.2vw; overflow: hidden; }
+
+/* KAZAKH priority -> heavily weighted */
+.dish-title-kk { font-weight: 900; font-size: max(8px, calc(min(1.4vw, 2.5vh) * (3 / var(--grid-rows)))); color: var(--color-kz-title, var(--secondary-color)); line-height: 1.1; white-space: normal; }
+/* RUSSIAN text -> less weighted */
+.dish-title-ru { font-weight: 600; font-size: max(7px, calc(min(1vw, 1.8vh) * (3 / var(--grid-rows)))); color: var(--color-ru-title, var(--primary-color)); margin-top: 1px; }
+
+.dish-price { font-weight: 900; font-size: max(10px, calc(min(1.8vw, 3.2vh) * (3 / var(--grid-rows)))); color: var(--color-price, var(--secondary-color)); margin-top: auto; }
 
 /* Fluid Images */
-.dish-image-container { position: relative; flex-shrink: 0; width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: transparent; }
+.dish-image-container { position: relative; flex-shrink: 0; width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: transparent; max-height: calc(100% - 4vh); } /* Prevents crushing text completely */
 .dish-image-container img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: screen; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5)); } /* Beautiful blending for pure black inputs */
 .new-badge { position: absolute; top: 5%; left: 5%; background: #ffcc00; color: #000; padding: 2px 6px; border-radius: 20px; font-weight: 900; font-size: min(0.8vw, 1.5vh); }
 .type-icons { position: absolute; top: 5%; right: 5%; display: flex; gap: 3px; }
 .type-icons span { background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 4px; font-size: min(0.7vw, 1.2vh); font-weight: bold; }
+
+/* ========================================= */
+/* SMART LAYOUTS */
+/* ========================================= */
+.layout-stacked { flex-direction: column !important; }
+.layout-stacked .display-category { flex-direction: column; width: 100%; }
+
+.layout-overlay .display-dish { justify-content: flex-end; position: relative; border-radius: 12px; }
+.layout-overlay .dish-image-container { position: absolute; top: 0; left: 0; height: 100%; max-height: 100%; width: 100%; z-index: 0; }
+.layout-overlay .dish-image-container img { object-fit: cover; filter: brightness(0.7); mix-blend-mode: normal; } /* Disable blending for overlay */
+.layout-overlay .dish-info { position: relative; z-index: 10; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); padding-top: 2vw; justify-content: flex-end;}
+

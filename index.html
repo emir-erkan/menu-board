@@ -32,13 +32,22 @@
                 </div>
 
                 <div class="setting-group">
+                    <label>Smart Layout Mode</label>
+                    <select id="layout-select">
+                        <option value="layout-standard">Smart Columns (Default)</option>
+                        <option value="layout-stacked">Smart Stacked (Vertical Rows)</option>
+                        <option value="layout-overlay">Smart Overlay (Images 100% Text Inside)</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
                     <label>Design Tokens</label>
                     <div class="color-grid">
                         <div class="color-item"><label>Global Bg</label><input type="color" id="color-bg" value="#000000"></div>
+                        <div class="color-item"><label>Dish Title (KK)</label><input type="color" id="color-secondary" value="#ff4500"></div>
                         <div class="color-item"><label>Dish Title (RU)</label><input type="color" id="color-primary" value="#ffffff"></div>
-                        <div class="color-item"><label>Dish Title (KK)</label><input type="color" id="color-secondary" value="#aaaaaa"></div>
-                        <div class="color-item"><label>Group Title (RU)</label><input type="color" id="color-ru-title" value="#ffffff"></div>
                         <div class="color-item"><label>Group Title (KK)</label><input type="color" id="color-kz-title" value="#ff4500"></div>
+                        <div class="color-item"><label>Group Title (RU)</label><input type="color" id="color-ru-title" value="#ffffff"></div>
                         <div class="color-item"><label>Price</label><input type="color" id="color-price" value="#00ff00"></div>
                         <div class="color-item"><label>Dish Card</label><input type="color" id="color-dish-bg" value="#0a0a0a"></div>
                         <div class="color-item"><label>Group Box</label><input type="color" id="color-group-bg" value="#111114"></div>
